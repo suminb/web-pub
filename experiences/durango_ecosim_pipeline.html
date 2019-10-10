@@ -1,0 +1,279 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sumin Byeon</title>
+
+  <meta name="viewport" content="width=device-width"/>
+
+  <meta property="og:title" content="Sumin Byeon"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="http://shortbread.io/static/images/byeonbread_72.jpg"/>
+  <meta property="og:site_name" content="shortbread.io"/>
+  <meta property="fb:admins" content="10132775"/>
+  <meta property="og:description" content="Sumin Byeon - Game server programmer at Nexon"/>
+
+  <link rel="stylesheet" type="text/css" href="/static/semantic.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/static/stylesheets/main.css"/>
+
+
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+  <script src="/static/semantic.min.js"></script>
+  <script>
+  $(document)
+    .ready(function() {
+
+      // fix menu when passed
+      $('.masthead')
+        .visibility({
+          once: false,
+          onBottomPassed: function() {
+            $('.fixed.menu').transition('fade in');
+          },
+          onBottomPassedReverse: function() {
+            $('.fixed.menu').transition('fade out');
+          }
+        })
+      ;
+
+      // create sidebar and attach to menu open
+      $('.ui.sidebar')
+        .sidebar('attach events', '.toc.item')
+      ;
+
+    })
+  ;
+  </script>
+
+
+
+</head>
+<body>
+  <!-- Following Menu -->
+  <div class="ui large top fixed hidden menu">
+    <div class="ui container">
+      <a href="/"
+  class=" item">Home</a>
+<a href="/coding-expedition.html"
+  class=" item">Coding Expedition</a>
+<a href="/experience.html"
+  class="active item">Experience</a>
+  <!--
+  <div class="right item">
+    <a class="ui inverted button">Log in</a>
+    <a class="ui inverted button">Sign Up</a>
+  </div>
+  -->
+    </div>
+  </div>
+
+  <!-- Sidebar Menu -->
+  <div class="ui vertical inverted sidebar menu">
+    <a href="/"
+  class=" item">Home</a>
+<a href="/coding-expedition.html"
+  class=" item">Coding Expedition</a>
+<a href="/experience.html"
+  class="active item">Experience</a>
+  <!--
+  <div class="right item">
+    <a class="ui inverted button">Log in</a>
+    <a class="ui inverted button">Sign Up</a>
+  </div>
+  -->
+  </div>
+
+
+  <!-- Page Contents -->
+  <div class="pusher">
+    <div class="ui container">
+      <div class="ui large secondary pointing menu">
+        <a class="toc item">
+          <i class="sidebar icon"></i>
+        </a>
+        <a href="/"
+  class=" item">Home</a>
+<a href="/coding-expedition.html"
+  class=" item">Coding Expedition</a>
+<a href="/experience.html"
+  class="active item">Experience</a>
+  <!--
+  <div class="right item">
+    <a class="ui inverted button">Log in</a>
+    <a class="ui inverted button">Sign Up</a>
+  </div>
+  -->
+      </div>
+    </div>
+    <div class="ui text container" style="margin: 2em 0 2em 0;">
+      <h1>Ecosystem Pipeline</h1>
+      <div>
+        <i class="calendar alternate icon"></i>
+        Sep 2015 (approx.) - Sep 2017 (approx.)
+      </div>
+      <div>
+        <i class="tags icon"></i>
+        
+  <a href="/experiences/tags/distributed.html" class="ui label">distributed</a>
+  
+  <a href="/experiences/tags/scalability.html" class="ui label">scalability</a>
+  
+  <a href="/experiences/tags/aws.html" class="ui label">aws</a>
+  
+  <a href="/experiences/tags/game.html" class="ui label">game</a>
+  
+      </div>
+      <p><p>We have developed the <a href="/experience/durango_ecosim.html">Ecosystem Simulator</a> to make the natural
+environment of our game world realistic. However, we need a lot more than just
+an executable of the Ecosystem Simulator.</p>
+<p>The ecosystem in the game is not static at all; it is an ever-changing
+environment. Players walk around to harvest plants and other natural resources
+and the system tries to replenish those, not necessarily at the previously
+existed locations, but in anywhere appropriate. This is where the <a href="/experience/durango_ecosim.html">Ecosystem
+Simulator</a> comes into play; it takes the current environment as an
+input, performs some calculations, and produces the outcome.</p>
+<p>Now, imagine the environment on which the game server code is deployed. We
+certainly have more than (a lot more than) a single machine. Running the
+<a href="/experience/durango_ecosim.html">Ecosystem Simulator</a> entails a variety of challenges due to the
+sheer volume of computations.</p>
+<p>We had two major goals in our mind:</p>
+<ol>
+<li>Contain the runtime in a constant time (<em>O</em>(<em>1</em>)).</li>
+<li>Keep the cost low.</li>
+</ol>
+<p>We wanted to make the simulator runtime independent of the size of the world. In
+other words, the runtime of the simulator remains unchanged even if we run the
+simulator on bigger lands.</p>
+<p>Cost saving is another key aspect. There is no need to run the simulator for the
+entire game world; if some part of the world remains unvisited, we presumably do
+not need to run the simulator on that part as no one is even looking at it. One
+of the key philosophies of our game server architecture is <em>"no audience, no
+play."</em></p>
+<h2>The Architecture</h2>
+<figure>
+  <img src="/static/images/ecosim_pipeline_architecture.png" style="max-width:90%"/>
+</figure>
+
+<p>In summary, this is an overview of the architecture that we have settled on.
+This may not be obvious at first glance, but we will dive into each component
+and explain what kind of technical problems we faced and how we came up with
+plausible solutions.</p>
+<h3>The Environment</h3>
+<ul>
+<li>The <a href="/experience/durango_ecosim.html">Ecosystem Simulator</a> is packaged as a Docker image.</li>
+<li>The Docker image is hosted on Amazon ECR.</li>
+<li>The simulator will be run on Amazon ECS.</li>
+</ul>
+<h2>Scalability &amp; Automation</h2>
+<h3>Amazon S3 Bucket Replication</h3>
+<h3>Amazon Simple Queue Service (SQS)</h3>
+<!--Now, the game server can invoke an ECS task, but we have a potential problem.-->
+
+<p>Player activities are something we can hardly predict accurately. Sometimes a
+lot of players move around and destroy the forest, and sometimes not many
+players are around.</p>
+<p>We have provisioned a certain number of ECS agents, which determines our compute
+capacity. When we go over the limit, it will not be able to run any additional
+tasks and we are going to have missing tasks, which translates into
+un-replenished, empty spots in the game world.</p>
+<p>To alleviate this problem, we brought the SQS into the picture to act as a
+buffer between the producer and the consumer. Here, the producer is the game
+server and the consumer is the ECS cluster. Rather than having the game server
+directly invoke an ECS task, it inserts a request message in the queue and a
+Lambda function processes it subsequently. We need Lambda because SQS messages
+cannot invoke an ECS task by themselves.</p>
+<p>In distributed systems, two things are very difficult to achieve:</p>
+<ol>
+<li>Deliver messages exactly once</li>
+<li>Deliver messages in order</li>
+</ol>
+<p>In our case, the exactly-once semantics is relatively less of concern and the
+throughput was a lot more important, so we decided to go with the standard
+queue.</p>
+<p>To make a side note, those problems can be seen as a mathematical problem,
+rather than a software engineering problem. If your operations are
+communicative, out-of-order messages in SQS won’t affect the final outcome.
+Likewise, if your operations are idempotent, duplicated messages won’t cause
+any damage.</p>
+<p>In our case, the replenish operations are executed on a chunk basis, so the
+order in which they are carried out doesn’t really matter.</p>
+<p>And the replenish algorithm is designed in a way that the marginal difference
+after each iteration asymptotically approaches to zero. This isn’t exactly a
+purely idempotent function in a mathematical sense, but in practice, executing
+the replenish operation twice instead of once produces an acceptable outcome.
+It looks ‘good enough’. Message duplication is an exceptional case rather than
+an average case, we decided not to worry about it too much. So the standard
+queue was a more reasonable choice for us.</p>
+<h3>Chunks</h3>
+<p><img src="/static/images/ecosim_chunks.jpg" style="max-width:90%"></p>
+<p>A tile is the finest granularity for object placements. A single object
+occupies one tile. A chunk is a pack of 16x16 tiles. A chunk is a basic unit
+for a workload. For example, our game server loads terrain data by chunk, and
+the Ecosystem Simulator does its job on a chunk basis. By dividing up a large
+island in small chunks like this, we can process any task in parallel, and most
+importantly, we can finish the tasks in a fixed amount of time, regardless of
+the size of the island, as long as enough compute power is provided and there
+are no inter-dependencies between tasks.</p>
+<h3>Amazon Elastic Container Service (ECS)</h3>
+<p>(TODO: Write this section)</p>
+<h3>Auto Scaling</h3>
+<p>(TODO: Write this section)</p>
+<h2>Public Speeches</h2>
+<p>This article is a simplified version of the following public speeches. For more
+detailed information, you may consult these:</p>
+<ul>
+<li>AWS re:Invent 2017: <a href="https://www.youtube.com/watch?v=H7kF7r7UBFE">Automating Mother Nature</a></li>
+<li>Nexon Developers Conference 2016: <a href="http://ndcreplay.nexon.com/NDC2016/sessions/NDC2016_0062.html">Automated Game Terrain Management for Durango</a></li>
+</ul>
+<h2>Related Projects</h2>
+<ul>
+<li><a href="/experience/durango.html">Durango</a></li>
+<li><a href="/experience/durango_ecosim.html">Ecosystem Simulator</a></li>
+</ul></p>
+    </div>
+    <div class="ui inverted vertical footer segment">
+  <div class="ui container">
+    <div class="ui stackable inverted divided equal height stackable grid">
+      <div class="three wide column">
+        <h4 class="ui inverted header">Other Projects</h4>
+        <div class="ui inverted link list">
+          <a href="http://labs.suminb.com" class="item">Labs</a>
+          <a href="http://better-translator.com" class="item">Better Translator</a>
+          <a href="http://tldr.kr" class="item">TL;DR</a>
+          <a href="https://boincstats.com/en/stats/-1/user/detail/a077d8a4dee6d1c4836f80c4ebcdb8bb/" class="item">
+            BOINC
+          </a>
+        </div>
+      </div>
+      <div class="seven wide column">
+        <h4 class="ui inverted header">Fork me on GitHub</h4>
+        <p>
+          The source code for this website can be found
+          <a href="http://github.com/suminb/web">here.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+
+
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-346833-8']);
+    _gaq.push(['_setDomainName', 'none']);
+    _gaq.push(['_setAllowLinker', true]);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</body>
+</html>

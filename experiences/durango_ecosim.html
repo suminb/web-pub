@@ -1,0 +1,300 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sumin Byeon</title>
+
+  <meta name="viewport" content="width=device-width"/>
+
+  <meta property="og:title" content="Sumin Byeon"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="http://shortbread.io/static/images/byeonbread_72.jpg"/>
+  <meta property="og:site_name" content="shortbread.io"/>
+  <meta property="fb:admins" content="10132775"/>
+  <meta property="og:description" content="Sumin Byeon - Game server programmer at Nexon"/>
+
+  <link rel="stylesheet" type="text/css" href="/static/semantic.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/static/stylesheets/main.css"/>
+
+
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+  <script src="/static/semantic.min.js"></script>
+  <script>
+  $(document)
+    .ready(function() {
+
+      // fix menu when passed
+      $('.masthead')
+        .visibility({
+          once: false,
+          onBottomPassed: function() {
+            $('.fixed.menu').transition('fade in');
+          },
+          onBottomPassedReverse: function() {
+            $('.fixed.menu').transition('fade out');
+          }
+        })
+      ;
+
+      // create sidebar and attach to menu open
+      $('.ui.sidebar')
+        .sidebar('attach events', '.toc.item')
+      ;
+
+    })
+  ;
+  </script>
+
+
+
+</head>
+<body>
+  <!-- Following Menu -->
+  <div class="ui large top fixed hidden menu">
+    <div class="ui container">
+      <a href="/"
+  class=" item">Home</a>
+<a href="/coding-expedition.html"
+  class=" item">Coding Expedition</a>
+<a href="/experience.html"
+  class="active item">Experience</a>
+  <!--
+  <div class="right item">
+    <a class="ui inverted button">Log in</a>
+    <a class="ui inverted button">Sign Up</a>
+  </div>
+  -->
+    </div>
+  </div>
+
+  <!-- Sidebar Menu -->
+  <div class="ui vertical inverted sidebar menu">
+    <a href="/"
+  class=" item">Home</a>
+<a href="/coding-expedition.html"
+  class=" item">Coding Expedition</a>
+<a href="/experience.html"
+  class="active item">Experience</a>
+  <!--
+  <div class="right item">
+    <a class="ui inverted button">Log in</a>
+    <a class="ui inverted button">Sign Up</a>
+  </div>
+  -->
+  </div>
+
+
+  <!-- Page Contents -->
+  <div class="pusher">
+    <div class="ui container">
+      <div class="ui large secondary pointing menu">
+        <a class="toc item">
+          <i class="sidebar icon"></i>
+        </a>
+        <a href="/"
+  class=" item">Home</a>
+<a href="/coding-expedition.html"
+  class=" item">Coding Expedition</a>
+<a href="/experience.html"
+  class="active item">Experience</a>
+  <!--
+  <div class="right item">
+    <a class="ui inverted button">Log in</a>
+    <a class="ui inverted button">Sign Up</a>
+  </div>
+  -->
+      </div>
+    </div>
+    <div class="ui text container" style="margin: 2em 0 2em 0;">
+      <h1>Ecosystem Simulator</h1>
+      <div>
+        <i class="calendar alternate icon"></i>
+        Sep 2014 - Sep 2016 (approx.)
+      </div>
+      <div>
+        <i class="tags icon"></i>
+        
+  <a href="/experiences/tags/csharp.html" class="ui label">csharp</a>
+  
+  <a href="/experiences/tags/opencl.html" class="ui label">opencl</a>
+  
+  <a href="/experiences/tags/simulation.html" class="ui label">simulation</a>
+  
+  <a href="/experiences/tags/math.html" class="ui label">math</a>
+  
+  <a href="/experiences/tags/game.html" class="ui label">game</a>
+  
+      </div>
+      <p><p>It was the summer of 2014 when I joined <a href="https://what.studio/">the team</a>. The
+team size was quite small at the time, with less than 30 people or so, and
+<a href="https://durango.nexon.com/">our game</a> was still in the early stage of
+development, trying out new things and explore all the possibilities out
+there. It was a lot of fun.</p>
+<p>One day, my boss came along saying "hey, we want to make a realistic in-game
+ecosystem, would you like to take charge of that?" So what do you mean by a
+<em>realistic ecosystem</em>? We have a spectacular in-game view of wild lands, but
+what we wanted was far beyond just looking good. In essence, we wanted to make
+an in-game ecosystem that resembles the real world.</p>
+<p>It would be impractical to plant vegetation and other natural resources
+manually or randomly. Manual planting would hardly work due to the sheer size
+of the in-game world. Random planting, on the other hand, would certainly
+violate manu rules to which the real ecosystem conforms. For example, we
+wouldn't want to plant banana trees in a snow land or the middle of the ocean.</p>
+<p>To make our dream come true, we decided to develop a very sophisticated
+algorithm to determine the location and the type of plants. The algorithm
+considers the type of soil, the temperature, the humidity, and other
+surrounding conditions.</p>
+<figure>
+  <img src="/static/images/ecosim.png" style="max-width:70%"/>
+</figure>
+
+<p>The biggest challenge was the sheer volume of computations it takes to
+construct a solution. We had tried several ways to make these computations fast
+and they can be summarized as follows.</p>
+<h2>First Approach: Matrix Multiplication For Biomass Precalculation</h2>
+<p>One of the important criteria is something we internally called <em>biomass</em>,
+which essentially refers to the weight or the predominance of each biological
+entity. In general, bigger species such as <a href="https://en.wikipedia.org/wiki/Adansonia">baobab trees</a> have higher
+biomass whereas smaller species have lower biomass. Each species has different
+requirements for surrounding biomass; some prefer higher biomasses nearby,
+others prefer lower biomass in the vicinity.</p>
+<p>What we need to take into consideration is the sum of all biomasses within the
+nearby region when given a particular coordinate, not the biomass of a single
+coordinate. Calculating the sum of biomasses within a certain region yields a
+time complexity of <em>O(n<sup>2</sup>)</em> where <em>n</em> is the radius of the region.
+Given that we have a square-shaped world (conceptually, in terms of coordinate
+systems) of a width of <em>m</em>, the total time complexity to calculate the sum of
+biomasses for all possible locations is <em>O(m<sup>2</sup>n<sup>2</sup>)</em> and this
+can be enormous.</p>
+<p>So we started looking into faster methods to calculate the biomasses and came up
+with a simple yet very effective algorithm, using matrix multiplications, to
+pre-calculate the sum of biomasses for all coordinates. The resulting matrix is
+something we call a <em>biomass map</em>, which is essentially a lookup table; for each
+coordinate, the biomass map stores the sum of the biomasses in the vicinity.</p>
+<figure>
+  <img src="/static/images/biomass_map_precalculation.png" style="max-width:100%"/>
+  <figcaption>Fig.1 - Pre-calculation of biomass maps</figcaption>
+</figure>
+
+<p>The naive algorithm for matrix multiplication yields <em>O(m<sup>3</sup>)</em>, which
+has virtually no advantage over our original method. However, there is a faster
+algorithm for matrix multiplication that yields <em>O(m<sup>2.807</sup>)</em>.<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> This
+gives us practical headstart by saving a large number of multiplication
+operations. Moreover, there is an additional advantage in an engineering
+perspective: sequential memory access is faster than random access.<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup></p>
+<figure>
+  <img src="/static/images/biomass_map_time_complexities.png" style="max-width:70%"/>
+  <figcaption>Fig.2 - Matrix multiplication is faster unless the world is huge</figcaption>
+</figure>
+
+<p>As a result, we were able to achieve a marginal, but measurable<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup> improvement
+over our original method. However, this still takes about 30 minutes for a world
+of 2048x2048, which certainly is a great inconvenience for rapid development. So
+we decided to look into other options.</p>
+<h2>Second Apprach: OpenCL</h2>
+<p>One of irresistible solutions to handle computationally intensive tasks is
+<a href="https://en.wikipedia.org/wiki/General-purpose_computing_on_graphics_processing_units">GPGPU</a>. That is exactly what those <a href="https://en.wikipedia.org/wiki/Graphics_processing_unit">GPU</a>s are made for: crunching
+numbers. There are two major choices when it comes to GPGPU: <a href="https://www.khronos.org/opencl/">OpenCL</a>
+and <a href="https://www.geforce.com/hardware/technology/cuda">CUDA</a>. Although CUDA could achieve a higher performance<sup>[citation
+needed]</sup>, we opted for OpenCL because of its portability and vendor
+agnostic aspect.</p>
+<p>Long story short, we wrote an OpenCL kernel for biomass maps pre-calculation. As
+a result, we were able to reduce the 30-minute runtime down to one minute and
+fifteen seconds, which is a 96% improvement.</p>
+<p>Nevertheless, the GPGPU solution offers remarkable performance gains, it comes
+at a price. Most of all, it was a great engineering challenge; it was difficult
+to debug, difficult to profile, and difficult to do anything with it. That's
+probably because we had no prior GPGPU experience whatsoever. Another concern
+was maintenance and recruiting. Software engineers with GPGPU experience were
+rare commodities in the job market (at least in 2014, in South Korea).</p>
+<p>For this reason, we decided to discard the GPGPU option and move onto a
+different one, which will be explained in the next section.</p>
+<h2>Third Approach: Compressed Sparse Row</h2>
+<p>One characteristic of our game world we could exploit was that it is mostly
+empty. In many cases, half of the world is deep ocean; players may enter
+shallow water areas but they are not allowed to swim into the deep ocean, and
+thus there are no biological entities nor natural resources in the deep ocean.
+Furthermore, not all land spaces are fully occupied.</p>
+<p>This suggests that we might be able to represent our matrices in a <a href="https://en.wikipedia.org/wiki/Sparse_matrix#Compressed_sparse_row_(CSR,_CRS_or_Yale_format)">compressed
+sparse row (CSR)</a> format. Then the time complexity will no longer be
+relevant to the size of the world, but rather the number of biological entities
+and natural resources in the world.</p>
+<p>Fortunately, the <a href="https://www.mathdotnet.com/">math library</a> we use provides
+compressed spare row representations of matrices and vectors. After switching to
+CSR, we were able to complete the biomass maps computation in just eighteen
+seconds, which is slightly slower than the GPGPU solution but certainly
+acceptable.</p>
+<h2>Conclusion</h2>
+<p>Ecosystem simulation is inherently computationally intensive. We have explored 
+several different strategies to minimize the computing time. GPGPU offers
+lucrative benefits when it comes to large-scale number crunching operations,
+however, given our circumstances, it was difficult to employ GPGPU for
+production due to practical constraints. We decided to settle with the
+compressed sparse row (CSR) representation of matrices as it provides
+comparable performance to that of GPGPU without having engineering and
+administrative burdens.</p>
+<h2>Public Speech On This Topic</h2>
+<p>More information (in Korean) can be found in the following public speech deck
+from Nexon Developers Conference (NDC) 2015:</p>
+<p><a href="http://ndcreplay.nexon.com/NDC2015/sessions/NDC2015_0063.html">http://ndcreplay.nexon.com/NDC2015/sessions/NDC2015_0063.html</a></p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p><a href="https://en.wikipedia.org/wiki/Strassen_algorithm">https://en.wikipedia.org/wiki/Strassen_algorithm</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://superuser.com/questions/782197/in-l1-l2-cache-and-dram-is-sequential-access-faster-than-random-access">https://superuser.com/questions/782197/in-l1-l2-cache-and-dram-is-sequential-access-faster-than-random-access</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>Unfortunately, I was not able to find the exact numbers because I'm no longer with the company at the time of writing of this article.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></p>
+    </div>
+    <div class="ui inverted vertical footer segment">
+  <div class="ui container">
+    <div class="ui stackable inverted divided equal height stackable grid">
+      <div class="three wide column">
+        <h4 class="ui inverted header">Other Projects</h4>
+        <div class="ui inverted link list">
+          <a href="http://labs.suminb.com" class="item">Labs</a>
+          <a href="http://better-translator.com" class="item">Better Translator</a>
+          <a href="http://tldr.kr" class="item">TL;DR</a>
+          <a href="https://boincstats.com/en/stats/-1/user/detail/a077d8a4dee6d1c4836f80c4ebcdb8bb/" class="item">
+            BOINC
+          </a>
+        </div>
+      </div>
+      <div class="seven wide column">
+        <h4 class="ui inverted header">Fork me on GitHub</h4>
+        <p>
+          The source code for this website can be found
+          <a href="http://github.com/suminb/web">here.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+
+
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-346833-8']);
+    _gaq.push(['_setDomainName', 'none']);
+    _gaq.push(['_setAllowLinker', true]);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</body>
+</html>
