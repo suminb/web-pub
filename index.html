@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sumin Byeon</title>
+
+  <meta name="viewport" content="width=device-width"/>
+
+  <meta property="og:title" content="Sumin Byeon"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="http://shortbread.io/static/images/byeonbread_72.jpg"/>
+  <meta property="og:site_name" content="shortbread.io"/>
+  <meta property="fb:admins" content="10132775"/>
+  <meta property="og:description" content="Sumin Byeon - Software Engineer at Coupang"/>
+
+  <link rel="stylesheet" type="text/css" href="/static/semantic.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/static/stylesheets/main.css"/>
+
+
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+  <script src="/static/semantic.min.js"></script>
+  <script>
+  $(document)
+    .ready(function() {
+
+      // fix menu when passed
+      $('.masthead')
+        .visibility({
+          once: false,
+          onBottomPassed: function() {
+            $('.fixed.menu').transition('fade in');
+          },
+          onBottomPassedReverse: function() {
+            $('.fixed.menu').transition('fade out');
+          }
+        })
+      ;
+
+      // create sidebar and attach to menu open
+      $('.ui.sidebar')
+        .sidebar('attach events', '.toc.item')
+      ;
+
+    })
+  ;
+  </script>
+
+
+
+</head>
+<body>
+  <!-- Following Menu -->
+  <div class="ui large top fixed hidden menu">
+    <div class="ui container">
+      <a href="/"
+  class="active item">Home</a>
+<a href="/coding-expedition.html"
+  class=" item">Coding Expedition</a>
+<a href="/experience.html"
+  class=" item">Experience</a>
+  <!--
+  <div class="right item">
+    <a class="ui inverted button">Log in</a>
+    <a class="ui inverted button">Sign Up</a>
+  </div>
+  -->
+    </div>
+  </div>
+
+  <!-- Sidebar Menu -->
+  <div class="ui vertical inverted sidebar menu">
+    <a href="/"
+  class="active item">Home</a>
+<a href="/coding-expedition.html"
+  class=" item">Coding Expedition</a>
+<a href="/experience.html"
+  class=" item">Experience</a>
+  <!--
+  <div class="right item">
+    <a class="ui inverted button">Log in</a>
+    <a class="ui inverted button">Sign Up</a>
+  </div>
+  -->
+  </div>
+
+
+
+  <!-- Page Contents -->
+  <div class="pusher">
+    <div class="ui inverted vertical masthead center aligned segment">
+
+      <div class="ui container">
+        <div class="ui large secondary inverted pointing menu">
+          <a class="toc item">
+            <i class="sidebar icon"></i>
+          </a>
+          <a href="/"
+  class="active item">Home</a>
+<a href="/coding-expedition.html"
+  class=" item">Coding Expedition</a>
+<a href="/experience.html"
+  class=" item">Experience</a>
+  <!--
+  <div class="right item">
+    <a class="ui inverted button">Log in</a>
+    <a class="ui inverted button">Sign Up</a>
+  </div>
+  -->
+        </div>
+      </div>
+
+      <div class="ui text container">
+        <h1 class="ui inverted header">Sumin Byeon</h1>
+        <h2>"The data guy"</h2>
+      </div>
+    </div>
+
+    <div class="ui vertical stripe segment">
+      <div class="ui text container">
+        <p>
+          I'm leading a machine learning data platform team at NAVER CLOVA,
+          which is one of the most advanced, if not the most, machine learning
+          research and development organizations in South Korea. Our mission is
+          to develop and operate a large-scale, fault-tolerant machine learning
+          data platform where other engineers and researchers collaborate and
+          thrive to make next-generation AI systems.
+        </p>
+
+        <!-- TODO: Put an auto-updated commit graph here -->
+        <h3 class="ui header">Current Projects</h3>
+        <ul>
+          <li>Data Catalog System</li>
+          <li>ETL Pipeline</li>
+          <li>Data Exchange Hub</li>
+          <li>Feature Store</li>
+        </ul>
+
+        <h3 class="ui header">Past Projects</h3>
+        <ul>
+          <li><a href="https://github.com/suminb/finance">SB Finance Project</a></li>
+          <li><a href="https://github.com/suminb/sbcw">SB Coding Workshop</a></li>
+          <li><a href="http://durango.nexon.com">Durango</a></li>
+          <li><a href="https://github.com/suminb/interview-questions">Interview Questions</li>
+        </ul>
+
+        <h3 class="ui header">Contacts</h3>
+        <ul>
+          <li><a href="http://philosophical.one">Blog</a></li>
+          <li><a href="https://github.com/suminb">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/suminb">LinkedIn</a></li>
+        </ul>
+        <!--
+        <h4 class="ui horizontal header divider">
+          <a href="#">Case Studies</a>
+        </h4>
+        -->
+      </div>
+    </div>
+
+    <div class="ui inverted vertical footer segment">
+  <div class="ui container">
+    <div class="ui stackable inverted divided equal height stackable grid">
+      <div class="three wide column">
+        <h4 class="ui inverted header">Other Projects</h4>
+        <div class="ui inverted link list">
+          <a href="http://labs.suminb.com" class="item">Labs</a>
+          <a href="http://better-translator.com" class="item">Better Translator</a>
+          <a href="http://tldr.kr" class="item">TL;DR</a>
+          <a href="https://boincstats.com/en/stats/-1/user/detail/a077d8a4dee6d1c4836f80c4ebcdb8bb/" class="item">
+            BOINC
+          </a>
+        </div>
+      </div>
+      <div class="seven wide column">
+        <h4 class="ui inverted header">Fork me on GitHub</h4>
+        <p>
+          The source code for this website can be found
+          <a href="http://github.com/suminb/web">here.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+
+
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-346833-8']);
+    _gaq.push(['_setDomainName', 'none']);
+    _gaq.push(['_setAllowLinker', true]);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</body>
+</html>

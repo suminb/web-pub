@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sumin Byeon</title>
+
+  <meta name="viewport" content="width=device-width"/>
+
+  <meta property="og:title" content="Sumin Byeon"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="http://shortbread.io/static/images/byeonbread_72.jpg"/>
+  <meta property="og:site_name" content="shortbread.io"/>
+  <meta property="fb:admins" content="10132775"/>
+  <meta property="og:description" content="Sumin Byeon - Software Engineer at Coupang"/>
+
+  <link rel="stylesheet" type="text/css" href="/static/semantic.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/static/stylesheets/main.css"/>
+
+
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+  <script src="/static/semantic.min.js"></script>
+  <script>
+  $(document)
+    .ready(function() {
+
+      // fix menu when passed
+      $('.masthead')
+        .visibility({
+          once: false,
+          onBottomPassed: function() {
+            $('.fixed.menu').transition('fade in');
+          },
+          onBottomPassedReverse: function() {
+            $('.fixed.menu').transition('fade out');
+          }
+        })
+      ;
+
+      // create sidebar and attach to menu open
+      $('.ui.sidebar')
+        .sidebar('attach events', '.toc.item')
+      ;
+
+    })
+  ;
+  </script>
+
+
+
+</head>
+<body>
+  <!-- Following Menu -->
+  <div class="ui large top fixed hidden menu">
+    <div class="ui container">
+      <a href="/"
+  class=" item">Home</a>
+<a href="/coding-expedition.html"
+  class=" item">Coding Expedition</a>
+<a href="/experience.html"
+  class="active item">Experience</a>
+  <!--
+  <div class="right item">
+    <a class="ui inverted button">Log in</a>
+    <a class="ui inverted button">Sign Up</a>
+  </div>
+  -->
+    </div>
+  </div>
+
+  <!-- Sidebar Menu -->
+  <div class="ui vertical inverted sidebar menu">
+    <a href="/"
+  class=" item">Home</a>
+<a href="/coding-expedition.html"
+  class=" item">Coding Expedition</a>
+<a href="/experience.html"
+  class="active item">Experience</a>
+  <!--
+  <div class="right item">
+    <a class="ui inverted button">Log in</a>
+    <a class="ui inverted button">Sign Up</a>
+  </div>
+  -->
+  </div>
+
+
+  <!-- Page Contents -->
+  <div class="pusher">
+    <div class="ui container">
+      <div class="ui large secondary pointing menu">
+        <a class="toc item">
+          <i class="sidebar icon"></i>
+        </a>
+        <a href="/"
+  class=" item">Home</a>
+<a href="/coding-expedition.html"
+  class=" item">Coding Expedition</a>
+<a href="/experience.html"
+  class="active item">Experience</a>
+  <!--
+  <div class="right item">
+    <a class="ui inverted button">Log in</a>
+    <a class="ui inverted button">Sign Up</a>
+  </div>
+  -->
+      </div>
+    </div>
+    <div class="ui text container" style="margin: 2em 0 2em 0;">
+      
+      <h2>
+        <a href="/experiences/durango.html">Distributed MMORPG Server System (Durango)</a></h2>
+      <div>
+        <i class="calendar alternate icon"></i>
+        Jul 2014 - Jul 2018
+      </div>
+      <div>
+        <i class="tags icon"></i>
+        
+  <a href="/experiences/tags/python.html" class="ui label">python</a>
+  
+  <a href="/experiences/tags/couchbase.html" class="ui label">couchbase</a>
+  
+  <a href="/experiences/tags/distributed.html" class="ui label">distributed</a>
+  
+  <a href="/experiences/tags/game.html" class="ui label">game</a>
+  
+      </div>
+      <p>&lt;p&gt;This is where most of my experience lies on as a junior software engineer. This
+project provided me with a number of great opportunities to grow as a software
+engineer. Building an MMORPG server entails a long list of non-trivial
+challenges,...</p>
+      
+      <h2>
+        <a href="/experiences/durango_ecosim.html">Ecosystem Simulator</a></h2>
+      <div>
+        <i class="calendar alternate icon"></i>
+        Sep 2014 - Sep 2016 (approx.)
+      </div>
+      <div>
+        <i class="tags icon"></i>
+        
+  <a href="/experiences/tags/csharp.html" class="ui label">csharp</a>
+  
+  <a href="/experiences/tags/opencl.html" class="ui label">opencl</a>
+  
+  <a href="/experiences/tags/simulation.html" class="ui label">simulation</a>
+  
+  <a href="/experiences/tags/math.html" class="ui label">math</a>
+  
+  <a href="/experiences/tags/game.html" class="ui label">game</a>
+  
+      </div>
+      <p>&lt;p&gt;It was the summer of 2014 when I joined &lt;a href=&#34;https://what.studio/&#34;&gt;the team&lt;/a&gt;. The
+team size was quite small at the time, with less than 30 people or so, and
+&lt;a href=&#34;https://durango.nexon.com/&#34;&gt;our game&lt;/a&gt; was still in the early stage...</p>
+      
+      <h2>
+        <a href="/experiences/durango_ecosim_pipeline.html">Ecosystem Pipeline</a></h2>
+      <div>
+        <i class="calendar alternate icon"></i>
+        Sep 2015 (approx.) - Sep 2017 (approx.)
+      </div>
+      <div>
+        <i class="tags icon"></i>
+        
+  <a href="/experiences/tags/distributed.html" class="ui label">distributed</a>
+  
+  <a href="/experiences/tags/scalability.html" class="ui label">scalability</a>
+  
+  <a href="/experiences/tags/aws.html" class="ui label">aws</a>
+  
+  <a href="/experiences/tags/game.html" class="ui label">game</a>
+  
+      </div>
+      <p>&lt;p&gt;We have developed the &lt;a href=&#34;/experience/durango_ecosim.html&#34;&gt;Ecosystem Simulator&lt;/a&gt; to make the natural
+environment of our game world realistic. However, we need a lot more than just
+an executable of the Ecosystem Simulator.&lt;/p&gt;
+&lt;p&gt;The...</p>
+      
+    </div>
+    <div class="ui inverted vertical footer segment">
+  <div class="ui container">
+    <div class="ui stackable inverted divided equal height stackable grid">
+      <div class="three wide column">
+        <h4 class="ui inverted header">Other Projects</h4>
+        <div class="ui inverted link list">
+          <a href="http://labs.suminb.com" class="item">Labs</a>
+          <a href="http://better-translator.com" class="item">Better Translator</a>
+          <a href="http://tldr.kr" class="item">TL;DR</a>
+          <a href="https://boincstats.com/en/stats/-1/user/detail/a077d8a4dee6d1c4836f80c4ebcdb8bb/" class="item">
+            BOINC
+          </a>
+        </div>
+      </div>
+      <div class="seven wide column">
+        <h4 class="ui inverted header">Fork me on GitHub</h4>
+        <p>
+          The source code for this website can be found
+          <a href="http://github.com/suminb/web">here.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+
+
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-346833-8']);
+    _gaq.push(['_setDomainName', 'none']);
+    _gaq.push(['_setAllowLinker', true]);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</body>
+</html>
